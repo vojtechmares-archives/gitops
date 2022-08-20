@@ -1,0 +1,36 @@
+argo-cd:
+  server:
+    # configEnabled: false
+    # config:
+    #   url: "https://argocd.fox.k8s.vxm.cz/"
+    #   dex.config: |
+    #     connectors:
+    #       - type: gitlab
+    #         id: gitlab
+    #         name: GitLab
+    #         config:
+    #           baseURL: https://gitlab.mareshq.com
+    #           clientID: e699c44be6e14f5d9385b84c022d9a7a08196f374173aaa9ad19b2d20a563050
+    #           clientSecret: 953b3dd97b2b1d1a71dbec2c0204774bd0f1b5c94fea988ac23e795577e8c6eb
+    #           # redirectURI is filled by ArgoCD
+    #           # redirectURI: https://argocd.ant.k8s.vxm.cz/api/dex/callback
+    #           groups:
+    #           - infrastructure/mareshq
+    #           # flag which will switch from using the internal GitLab id to the users handle (@mention) as the user id.
+    #           # It is possible for a user to change their own user name but it is very rare for them to do so
+    #           useLoginAsID: false
+    ingress:
+      enabled: false
+      hosts:
+        - argocd.bee.k8s.vxm.cz
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        kubernetes.io/tls-acme: "true"
+        nginx.ingress.kubernetes.io/server-snippet: |
+          proxy_ssl_verify off;
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      tls:
+        - hosts:
+          - argocd.bee.k8s.vxm.cz
+          secretName: argocd-tls

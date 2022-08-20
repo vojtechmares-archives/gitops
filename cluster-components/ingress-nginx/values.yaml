@@ -5,11 +5,11 @@ ingress-nginx:
     ingressClassResource:
       default: true
 
+    hostPort:
+      enabled: true
+
     service:
-      type: NodePort
-      nodePorts:
-        http: 30080
-        https: 30443
+      type: ClusterIP
 
     metrics:
       enabled: false

@@ -11,8 +11,6 @@ ingress-nginx:
         http: 30080
         https: 30443
 
-      externalIPs: ["49.12.17.251"]
-
     metrics:
       enabled: false
       serviceMonitor:

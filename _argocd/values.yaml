@@ -20,7 +20,7 @@ argo-cd:
     #           # It is possible for a user to change their own user name but it is very rare for them to do so
     #           useLoginAsID: false
     ingress:
-      enabled: false
+      enabled: true
       hosts:
         - argocd.bee.k8s.vxm.cz
       ingressClassName: nginx

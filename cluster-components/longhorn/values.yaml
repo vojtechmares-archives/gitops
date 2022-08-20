@@ -1,0 +1,10 @@
+longhorn:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    host: longhorn.bee.k8s.vxm.cz
+    tls: true
+    tlsSecret: longhorn-tls
+
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod

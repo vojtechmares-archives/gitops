@@ -22,7 +22,7 @@ argo-cd:
     ingress:
       enabled: true
       hosts:
-        - argocd.bee.k8s.vxm.cz
+        - argocd.cloud.mareshq.com
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -32,5 +32,5 @@ argo-cd:
         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
       tls:
         - hosts:
-          - argocd.bee.k8s.vxm.cz
+          - argocd.cloud.mareshq.com
           secretName: argocd-tls

@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn
+  namespace: argocd
+spec:
+  destination:
+    namespace: longhorn-system
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: cluster-components/longhorn
+    repoURL: https://gitlab.mareshq.com/gitops/mareshq/bee.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

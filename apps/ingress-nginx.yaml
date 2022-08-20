@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: cluster-components/ingress-nginx
-    repoURL: https://gitlab.mareshq.com/gitops/mareshq/fox.git
+    repoURL: https://gitlab.mareshq.com/gitops/mareshq/bee.git
     targetRevision: HEAD
   syncPolicy:
     automated:

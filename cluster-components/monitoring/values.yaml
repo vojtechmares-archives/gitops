@@ -1,0 +1,145 @@
+kube-prometheus-stack:
+  prometheus:
+    fullnameOverride: prometheus
+
+    prometheusSpec:
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      ruleSelectorNilUsesHelmValues: false
+
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: longhorn
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 20Gi
+
+    ingress:
+      enabled: true
+      pathType: Prefix
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        # nginx.ingress.kubernetes.io/auth-url: "https://auth.cloud.mareshq.com/oauth2/auth"
+        # nginx.ingress.kubernetes.io/auth-signin: "https://auth.cloud.mareshq.com/oauth2/start?rd=$scheme://$host$request_uri"
+      hosts:
+        - prometheus.cloud.mareshq.com
+      paths:
+        - /
+      tls:
+        - hosts:
+          - prometheus.cloud.mareshq.com
+          secretName: prometheus-tls
+
+    serviceMonitor:
+      selfMonitor: true
+
+  grafana:
+    fullnameOverride: grafana
+
+    defaultDashboardsEnabled: true
+
+    adminPassword: zud!edy7WER5uqg7gjq
+
+    ingress:
+      enabled: true
+      pathType: Prefix
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - grafana.cloud.mareshq.com
+      paths:
+        - /
+      tls:
+        - hosts:
+          - grafana.cloud.mareshq.com
+          secretName: grafana-tls
+
+    serviceMonitor:
+      selfMonitor: true
+
+    # grafana.ini:
+    #   server:
+    #     root_url: https://grafana.cloud.mareshq.com
+    #   auth.gitlab:
+    #     enabled: true
+    #     allow_sign_up: true
+    #     client_id: bbe5e1c7a6bf81a6725b1fe7f5c64c96e9bc697bebd24d5e41b2cd623d38917b
+    #     client_secret: c137d2af70f82994be0c2be6437cef97cdaa7801e6cb232510fd7f10209d0cdf
+    #     scopes: read_api
+    #     auth_url: https://gitlab.mareshq.com/oauth/authorize
+    #     token_url: https://gitlab.mareshq.com/oauth/token
+    #     api_url: https://gitlab.mareshq.com/api/v4
+    #     allowed_groups: mareshq
+    #   auth.basic:
+    #     enabled: false
+    #   auth:
+    #     disable_login_form: false
+
+    persistence:
+      enabled: false
+      storageClassName: longhorn
+
+  alertmanager:
+    fullnameOverride: alertmanager
+
+    ingress:
+      enabled: true
+      pathType: Prefix
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        # nginx.ingress.kubernetes.io/auth-url: "https://auth.cloud.mareshq.com/oauth2/auth"
+        # nginx.ingress.kubernetes.io/auth-signin: "https://auth.cloud.mareshq.com/oauth2/start?rd=$scheme://$host$request_uri"
+      hosts:
+        - alertmanager.cloud.mareshq.com
+      paths:
+        - /
+      tls:
+        - hosts:
+          - alertmanager.cloud.mareshq.com
+          secretName: alertmanager-tls
+
+    serviceMonitor:
+      selfMonitor: true
+
+    kubeApiServer:
+      enabled: true
+
+    kubelet:
+      enabled: true
+
+    kubeControllerManager:
+      enabled: false
+
+    coreDns:
+      enabled: true
+
+    kubeScheduler:
+      enabled: true
+
+    kubeProxy:
+      enabled: true
+
+    kubeStateMetrics:
+      enabled: true
+
+    nodeExporter:
+      enabled: true
+
+    prometheusOperator:
+      serviceMonitor:
+        selfMonitor: true
+
+    nameOverride: prom
+
+    defaultRules:
+      create: false
+
+node-problem-detector:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+    prometheusRule:
+      enabled: true

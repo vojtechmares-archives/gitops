@@ -10,5 +10,5 @@ dependencies:
   version: 39.11.0
   repository: https://prometheus-community.github.io/helm-charts
 - name: node-problem-detector
-  version: 2.2.3
+  version: 2.2.2
   repository: https://charts.deliveryhero.io/

@@ -12,6 +12,8 @@ spec:
     path: cluster-components/monitoring
     repoURL: https://gitlab.mareshq.com/gitops/mareshq/bee.git
     targetRevision: HEAD
+    helm:
+      skipCrds: true
   syncPolicy:
     automated:
       prune: true

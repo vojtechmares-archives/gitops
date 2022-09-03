@@ -1,5 +1,5 @@
 kube-prometheus-stack:
-  fullnameOverride: monitoring
+  cleanPrometheusOperatorObjectNames: true
 
   prometheus:
     prometheusSpec:

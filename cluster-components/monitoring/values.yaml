@@ -1,4 +1,5 @@
 kube-prometheus-stack:
+  fullnameOverride: ""
   cleanPrometheusOperatorObjectNames: true
 
   prometheus:
@@ -135,6 +136,8 @@ kube-prometheus-stack:
       create: false
 
 node-problem-detector:
+  fullnameOverride: ""
+
   metrics:
     enabled: true
     serviceMonitor:

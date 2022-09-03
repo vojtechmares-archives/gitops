@@ -144,3 +144,6 @@ node-problem-detector:
       enabled: true
     prometheusRule:
       enabled: true
+
+prometheus-blackbox-exporter:
+  fullnameOverride: blackbox-exporter

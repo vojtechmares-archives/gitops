@@ -1,0 +1,6 @@
+dependencies:
+- name: operator
+  repository: https://operator.min.io/
+  version: 4.4.28
+digest: sha256:bc2c0b2a82de015678e983df74e70cb5fe34022b25f0e7b06305021eb943e722
+generated: "2022-09-03T12:05:50.765436+02:00"

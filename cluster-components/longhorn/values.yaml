@@ -7,4 +7,4 @@ longhorn:
     tlsSecret: longhorn-tls
 
     annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-prod
+      cert-manager.io/cluster-issuer: letsencrypt-mareshq

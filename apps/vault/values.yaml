@@ -10,7 +10,7 @@ vault:
       enabled: true
       ingressClassName: nginx
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-prod
+        cert-manager.io/cluster-issuer: letsencrypt-mareshq
       pathType: Prefix
       tls:
       - secretName: vault-tls

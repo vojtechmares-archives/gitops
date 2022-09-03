@@ -25,7 +25,7 @@ argo-cd:
         - argocd.cloud.mareshq.com
       ingressClassName: nginx
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-prod
+        cert-manager.io/cluster-issuer: letsencrypt-mareshq
         kubernetes.io/tls-acme: "true"
         nginx.ingress.kubernetes.io/server-snippet: |
           proxy_ssl_verify off;

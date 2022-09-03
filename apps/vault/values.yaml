@@ -1,0 +1,36 @@
+vault:
+  global:
+  tlsDisable: true
+
+  injector:
+    enabled: false
+
+  server:
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      pathType: Prefix
+      tls:
+      - secretName: vault-tls
+        hosts:
+          - vault.cloud.mareshq.com
+      hosts:
+      - host: vault.cloud.mareshq.com
+        paths:
+          - /
+
+    dataStorage:
+      enabled: true
+      size: 1Gi
+
+    auditStorage:
+      enabled: true
+      size: 1Gi
+
+    ha:
+      enabled: true
+      replicas: 3
+      raft:
+        enabled: true

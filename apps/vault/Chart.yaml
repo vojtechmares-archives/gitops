@@ -9,7 +9,3 @@ dependencies:
 - name: vault
   version: 0.21.0
   repository: https://helm.releases.hashicorp.com
-# Consul is storage for Vault (required in HA mode)
-- name: consul
-  version: 0.21.0
-  repository: https://helm.releases.hashicorp.com

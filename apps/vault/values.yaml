@@ -5,6 +5,9 @@ vault:
   injector:
     enabled: false
 
+  csi:
+    enabled: true
+
   server:
     ingress:
       enabled: true

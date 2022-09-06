@@ -7,6 +7,9 @@ minio:
     storageClass: longhorn
     size: 200Gi
 
+  DeploymentUpdate:
+    type: Delete
+
   ingress:
     enabled: true
 

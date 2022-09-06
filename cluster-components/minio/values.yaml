@@ -8,7 +8,7 @@ minio:
     size: 200Gi
 
   DeploymentUpdate:
-    type: Delete
+    type: Recreate
 
   ingress:
     enabled: true

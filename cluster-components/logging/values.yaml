@@ -1,0 +1,27 @@
+promtail:
+  fullnameOverride: promtail
+
+loki:
+  fullnameOverride: loki
+
+  write:
+    persistence:
+      size: 20Gi
+      storageClass: longhorn
+
+  read:
+    persistence:
+      size: 20Gi
+      storageClass: longhorn
+
+  singleBinary:
+    persistence:
+      storageClass: longhorn
+
+  monitoring:
+    # Do not collect the logs of Loki inside Loki
+    selfMonitoring:
+      enabled: false
+
+      grafanaAgent:
+        installOperator: false

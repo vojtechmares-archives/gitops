@@ -12,7 +12,7 @@ loki:
   read:
     persistence:
       size: 20Gi
-      storageClass: local-path
+      storageClass: longhorn
 
   singleBinary:
     persistence:

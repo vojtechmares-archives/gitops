@@ -4,7 +4,7 @@ simple-registry:
   image: registry:2
   storage: 50Gi
   proxyBodySize: 500m
-  clusterIssuer: letsencrypt-prod-mareshq
+  clusterIssuer: letsencrypt-mareshq
   registryUser: vojtechmares
   registryPassword: 8C8dLnnZVtQcWEDHhtuc
   hostReadOnly: docker.vmpkg.com

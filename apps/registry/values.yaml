@@ -1,0 +1,10 @@
+simple-registry:
+  host: private.docker.vmpkg.com
+
+  image: registry:2
+  storage: 50Gi
+  proxyBodySize: 500m
+  clusterIssuer: letsencrypt-prod-mareshq
+  registryUser: vojtechmares
+  registryPassword: 8C8dLnnZVtQcWEDHhtuc
+  hostReadOnly: docker.vmpkg.com

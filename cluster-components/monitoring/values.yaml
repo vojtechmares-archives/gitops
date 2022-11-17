@@ -10,7 +10,7 @@ kube-prometheus-stack:
       storageSpec:
         volumeClaimTemplate:
           spec:
-            storageClassName: local-path
+            storageClassName: hcloud-volumes
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:

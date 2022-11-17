@@ -22,13 +22,13 @@ spec:
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: k3s-agent-v1.24
+  name: k3s-agent-v1.25
   namespace: system-upgrade
   labels:
     k3s-upgrade: agent
 spec:
   concurrency: 1 # Batch size (roughly maps to maximum number of unschedulable nodes)
-  channel: https://update.k3s.io/v1-release/channels/v1.24
+  channel: https://update.k3s.io/v1-release/channels/v1.25
   nodeSelector:
     matchExpressions:
       - {key: k3s-upgrade, operator: Exists}

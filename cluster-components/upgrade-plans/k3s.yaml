@@ -1,7 +1,7 @@
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: k3s-server
+  name: k3s-server-v1.25
   namespace: system-upgrade
   labels:
     k3s-upgrade: server
@@ -22,7 +22,7 @@ spec:
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: k3s-agent
+  name: k3s-agent-v1.24
   namespace: system-upgrade
   labels:
     k3s-upgrade: agent

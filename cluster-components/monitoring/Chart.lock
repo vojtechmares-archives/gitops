@@ -4,9 +4,9 @@ dependencies:
   version: 39.11.0
 - name: node-problem-detector
   repository: https://charts.deliveryhero.io/
-  version: 2.2.2
+  version: 2.3.1
 - name: prometheus-blackbox-exporter
   repository: https://prometheus-community.github.io/helm-charts
   version: 7.0.0
-digest: sha256:40829558c0521005464f61bfc522fa2c2e2dcb4e6320e99733610bbb7777acbc
-generated: "2022-09-03T16:56:29.120177+02:00"
+digest: sha256:554854a3a62a2783cceacca8bb4d041cea76720c249e86ba60f63068ad915b54
+generated: "2022-11-23T13:27:06.462203+01:00"

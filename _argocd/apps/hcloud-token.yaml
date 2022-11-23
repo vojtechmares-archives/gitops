@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hcloud-csi-driver-token
+  name: hcloud-token
   namespace: argocd
 spec:
   destination:
@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: cluster-components/hcloud-csi-driver
+    path: cluster-components/hcloud-token
     repoURL: https://gitlab.mareshq.com/gitops/mareshq/bee.git
     targetRevision: HEAD
   syncPolicy:

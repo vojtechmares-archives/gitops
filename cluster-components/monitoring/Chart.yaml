@@ -7,7 +7,7 @@ appVersion: "1.0"
 
 dependencies:
 - name: kube-prometheus-stack
-  version: 39.11.0
+  version: 42.0.0
   repository: https://prometheus-community.github.io/helm-charts
 - name: node-problem-detector
   version: 2.3.1

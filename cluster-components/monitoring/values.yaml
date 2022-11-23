@@ -79,7 +79,7 @@ kube-prometheus-stack:
 
     persistence:
       enabled: false
-      storageClassName: longhorn
+      storageClassName: hcloud-volumes
 
   alertmanager:
     ingress:

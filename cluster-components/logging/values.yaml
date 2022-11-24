@@ -7,16 +7,16 @@ loki:
   write:
     persistence:
       size: 20Gi
-      storageClass: longhorn
+      storageClass: hcloud-volumes
 
   read:
     persistence:
       size: 20Gi
-      storageClass: longhorn
+      storageClass: hcloud-volumes
 
   singleBinary:
     persistence:
-      storageClass: longhorn
+      storageClass: hcloud-volumes
 
   monitoring:
     # Do not collect the logs of Loki inside Loki

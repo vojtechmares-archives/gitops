@@ -1,13 +1,13 @@
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: k3s-server-v1.25
+  name: k3s-server-v1.26
   namespace: system-upgrade
   labels:
     k3s-upgrade: server
 spec:
   concurrency: 1 # Batch size (roughly maps to maximum number of unschedulable nodes)
-  channel: https://update.k3s.io/v1-release/channels/v1.25
+  channel: https://update.k3s.io/v1-release/channels/v1.26
   nodeSelector:
     matchExpressions:
       - {key: k3s-upgrade, operator: Exists}
@@ -22,13 +22,13 @@ spec:
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: k3s-agent-v1.25
+  name: k3s-agent-v1.26
   namespace: system-upgrade
   labels:
     k3s-upgrade: agent
 spec:
   concurrency: 1 # Batch size (roughly maps to maximum number of unschedulable nodes)
-  channel: https://update.k3s.io/v1-release/channels/v1.25
+  channel: https://update.k3s.io/v1-release/channels/v1.26
   nodeSelector:
     matchExpressions:
       - {key: k3s-upgrade, operator: Exists}
@@ -39,7 +39,7 @@ spec:
   prepare:
     # Defaults to the same "resolved" tag that is used for the `upgrade` container, NOT `latest`
     image: rancher/k3s-upgrade
-    args: ["prepare", "k3s-server-v1.25"]
+    args: ["prepare", "k3s-server-v1.26"]
   drain:
     force: true
     skipWaitForDeleteTimeout: 60 # 1.18+ (honor pod disruption budgets up to 60 seconds per pod then moves on)

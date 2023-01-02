@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: apps/registry
-    repoURL: https://gitlab.mareshq.com/gitops/mareshq/bee.git
+    repoURL: https://github.com/vojtechmares/gitops.git
     targetRevision: HEAD
   syncPolicy:
     automated:

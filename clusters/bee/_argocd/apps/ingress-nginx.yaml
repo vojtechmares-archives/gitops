@@ -9,8 +9,8 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: cluster-components/ingress-nginx
-    repoURL: https://gitlab.mareshq.com/gitops/mareshq/bee.git
+    path: clusters/bee/infrastructure/ingress-nginx
+    repoURL: https://github.com/vojtechmares/gitops.git
     targetRevision: HEAD
   syncPolicy:
     automated:

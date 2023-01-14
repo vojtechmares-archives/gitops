@@ -12,9 +12,9 @@ ingress-nginx:
       type: ClusterIP
 
     metrics:
-      enabled: false
+      enabled: true
       serviceMonitor:
-        enabled: false
+        enabled: true
 
     updateStrategy:
       type: RollingUpdate

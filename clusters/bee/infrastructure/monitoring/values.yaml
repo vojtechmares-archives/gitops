@@ -30,7 +30,7 @@ kube-prometheus-stack:
             vxm_server: maple
 
     ingress:
-      enabled: true
+      enabled: false
       pathType: Prefix
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-mareshq

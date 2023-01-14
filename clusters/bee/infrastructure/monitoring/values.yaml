@@ -17,6 +17,18 @@ kube-prometheus-stack:
               requests:
                 storage: 20Gi
 
+      additionalScrapeConfigs:
+      - job_name: node-exporter-maple
+        scheme: http
+        static_configs:
+        - targets:
+          - maple.vxm.cz:9100
+          labels:
+            vxm_infra: true
+            vxm_dedicated: true
+            vxm_provider: hetzner
+            vxm_server: maple
+
     ingress:
       enabled: true
       pathType: Prefix

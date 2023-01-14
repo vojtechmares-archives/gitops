@@ -53,7 +53,7 @@ kube-prometheus-stack:
 
   alertmanager:
     ingress:
-      enabled: true
+      enabled: false
       pathType: Prefix
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-mareshq

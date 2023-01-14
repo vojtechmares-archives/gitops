@@ -49,50 +49,7 @@ kube-prometheus-stack:
       selfMonitor: true
 
   grafana:
-    fullnameOverride: grafana
-
-    defaultDashboardsEnabled: true
-
-    adminPassword: zud!edy7WER5uqg7gjq
-
-    ingress:
-      enabled: true
-      pathType: Prefix
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-mareshq
-      hosts:
-        - grafana.cloud.mareshq.com
-      paths:
-        - /
-      tls:
-        - hosts:
-          - grafana.cloud.mareshq.com
-          secretName: grafana-tls
-
-    serviceMonitor:
-      selfMonitor: true
-
-    # grafana.ini:
-    #   server:
-    #     root_url: https://grafana.cloud.mareshq.com
-    #   auth.gitlab:
-    #     enabled: true
-    #     allow_sign_up: true
-    #     client_id: bbe5e1c7a6bf81a6725b1fe7f5c64c96e9bc697bebd24d5e41b2cd623d38917b
-    #     client_secret: c137d2af70f82994be0c2be6437cef97cdaa7801e6cb232510fd7f10209d0cdf
-    #     scopes: read_api
-    #     auth_url: https://gitlab.mareshq.com/oauth/authorize
-    #     token_url: https://gitlab.mareshq.com/oauth/token
-    #     api_url: https://gitlab.mareshq.com/api/v4
-    #     allowed_groups: mareshq
-    #   auth.basic:
-    #     enabled: false
-    #   auth:
-    #     disable_login_form: false
-
-    persistence:
-      enabled: false
-      storageClassName: hcloud-volumes
+    enabled: false
 
   alertmanager:
     ingress:

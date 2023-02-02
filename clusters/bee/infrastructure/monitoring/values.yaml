@@ -52,55 +52,7 @@ kube-prometheus-stack:
     enabled: false
 
   alertmanager:
-    ingress:
-      enabled: false
-      pathType: Prefix
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-mareshq
-        # nginx.ingress.kubernetes.io/auth-url: "https://auth.cloud.mareshq.com/oauth2/auth"
-        # nginx.ingress.kubernetes.io/auth-signin: "https://auth.cloud.mareshq.com/oauth2/start?rd=$scheme://$host$request_uri"
-      hosts:
-        - alertmanager.cloud.mareshq.com
-      paths:
-        - /
-      tls:
-        - hosts:
-          - alertmanager.cloud.mareshq.com
-          secretName: alertmanager-tls
-
-    serviceMonitor:
-      selfMonitor: true
-
-    kubeApiServer:
-      enabled: true
-
-    kubelet:
-      enabled: true
-
-    kubeControllerManager:
-      enabled: false
-
-    coreDns:
-      enabled: true
-
-    kubeScheduler:
-      enabled: true
-
-    kubeProxy:
-      enabled: false
-
-    kubeStateMetrics:
-      enabled: true
-
-    nodeExporter:
-      enabled: true
-
-    prometheusOperator:
-      serviceMonitor:
-        selfMonitor: true
-
-    defaultRules:
-      create: false
+    enabled: false
 
   prometheus-node-exporter:
     fullnameOverride: node-exporter

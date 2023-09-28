@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cherry-argocd
+  namespace: argocd
+spec:
+  project: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: argocd
+  source:
+    chart: argo-cd
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: 5.46.7
+    helm:
+      releaseName: argocd
+      valuesObject:
+        ingress:
+          enabled: true
+          hosts:
+            - argocd.mareshq.com
+          ingressClassName: nginx
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-prod
+            nginx.ingress.kubernetes.io/server-snippet: |
+              proxy_ssl_verify off;
+            nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+          tls:
+            - hosts:
+                - argocd.mareshq.com
+              secretName: argocd-tls

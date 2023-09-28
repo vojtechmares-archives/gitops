@@ -9,12 +9,10 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
   destination:
     server: https://kubernetes.default.svc
     namespace: default
   source:
-    path: clusters/cherry/manifests/clusterissuer/clusterissuer.yaml
+    path: clusters/cherry/manifests/clusterissuer/
     repoURL: https://github.com/vojtechmares/gitops.git
     targetRevision: HEAD

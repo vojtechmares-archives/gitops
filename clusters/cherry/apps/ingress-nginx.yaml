@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cherry-ingress-nginx
+  namespace: argocd
+spec:
+  project: infrastructure
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: ingress-nginx
+  source:
+    chart: ingress-nginx
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: 4.8.0
+    helm:
+      releaseName: ingress-nginx
+      valuesObject:
+        # TODO: enable proxy protocol
+        controller:
+          kind: DaemonSet
+          service:
+            # TODO: use Service .spec.type: NodePort
+            type: ClusterIP
+          hostPort:
+            enabled: true

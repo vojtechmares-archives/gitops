@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cherry-cilium
+  namespace: argocd
+spec:
+  project: infrastructure
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: kube-system
+  source:
+    chart: cilium
+    repoURL: https://helm.cilium.io/
+    targetRevision: 1.14.2
+    helm:
+      releaseName: cilium
+      valuesObject:
+        operator:
+          replicas: 1
+        # Needed to run ingress-nginx in hostPort mode
+        kubeProxyReplacement: true
+        k8sServiceHost: 172.16.140.1
+        k8sServicePort: 6443
+        hubble:
+          relay:
+            enabled: true
+          ui:
+            enabled: true

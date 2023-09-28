@@ -21,17 +21,18 @@ spec:
     helm:
       releaseName: argocd
       valuesObject:
-        ingress:
-          enabled: true
-          hosts:
-            - argocd.mareshq.com
-          ingressClassName: nginx
-          annotations:
-            cert-manager.io/cluster-issuer: letsencrypt-prod
-            nginx.ingress.kubernetes.io/server-snippet: |
-              proxy_ssl_verify off;
-            nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-          tls:
-            - hosts:
-                - argocd.mareshq.com
-              secretName: argocd-tls
+        server:
+          ingress:
+            enabled: true
+            hosts:
+              - argocd.mareshq.com
+            ingressClassName: nginx
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt-prod
+              nginx.ingress.kubernetes.io/server-snippet: |
+                proxy_ssl_verify off;
+              nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+            tls:
+              - hosts:
+                  - argocd.mareshq.com
+                secretName: argocd-tls

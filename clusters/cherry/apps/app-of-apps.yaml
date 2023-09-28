@@ -13,6 +13,6 @@ spec:
     server: https://kubernetes.default.svc
     namespace: argocd
   source:
-    path: clusters/cherry/app/
+    path: clusters/cherry/apps/
     repoURL: https://github.com/vojtechmares/gitops.git
     targetRevision: HEAD

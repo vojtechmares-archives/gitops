@@ -15,6 +15,6 @@ spec:
     server: https://kubernetes.default.svc
     namespace: default
   source:
-    path: clusters/cherry/manifests/clusterissuer.yaml
+    path: clusters/cherry/manifests/clusterissuer/clusterissuer.yaml
     repoURL: https://github.com/vojtechmares/gitops.git
     targetRevision: HEAD

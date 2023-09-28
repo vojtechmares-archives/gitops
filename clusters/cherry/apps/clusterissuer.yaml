@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cherry-clusterissuer
+  namespace: argocd
+spec:
+  project: infrastructure
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  source:
+    path: clusters/cherry/manifests/clusterissuer.yaml
+    repoURL: https://github.com/vojtechmares/gitops.git
+    targetRevision: HEAD

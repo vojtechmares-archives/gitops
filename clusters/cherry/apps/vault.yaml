@@ -23,7 +23,7 @@ spec:
       valuesObject:
         global:
           enabled: true
-          tlsDisable: false
+          tlsDisable: true
 
         injector:
           enabled: true

@@ -25,7 +25,7 @@ spec:
           ingress:
             enabled: true
             hosts:
-              - argocd.mareshq.com
+              - argocd.ops.mareshq.com
             ingressClassName: nginx
             annotations:
               cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -34,5 +34,5 @@ spec:
               nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
             tls:
               - hosts:
-                  - argocd.mareshq.com
+                  - argocd.ops.mareshq.com
                 secretName: argocd-tls

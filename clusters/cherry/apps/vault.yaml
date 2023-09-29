@@ -1,0 +1,89 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cherry-vault
+  namespace: argocd
+spec:
+  project: infrastructure
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vault
+  source:
+    chart: vault
+    repoURL: https://charts.hetzner.cloud
+    targetRevision: 2.5.1
+    helm:
+      releaseName: vault
+      valuesObject:
+        global:
+          enabled: true
+          tlsDisable: false
+
+        injector:
+          enabled: true
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 250m
+            limits:
+              memory: 256Mi
+              cpu: 250m
+
+        server:
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt-prod
+            pathType: Prefix
+            tls:
+              - secretName: vault-tls
+                hosts:
+                  - vault.mareshq.com
+            hosts:
+              - host: vault.mareshq.com
+                paths:
+                  - /
+
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 400m
+            limits:
+              memory: 1Gi
+              cpu: 400m
+
+          readinessProbe:
+            enabled: true
+            path: "/v1/sys/health?standbyok=true&sealedcode=204&uninitcode=204"
+          livenessProbe:
+            enabled: true
+            path: "/v1/sys/health?standbyok=true"
+            initialDelaySeconds: 60
+
+          auditStorage:
+            enabled: true
+            size: 5Gi
+
+          dataStorage:
+            enabled: true
+            size: 5Gi
+
+          standalone:
+            enabled: false
+
+          ha:
+            enabled: true
+            replicas: 3
+            raft:
+              enabled: true
+              setNodeId: true
+
+            disruptionBudget:
+              enabled: true

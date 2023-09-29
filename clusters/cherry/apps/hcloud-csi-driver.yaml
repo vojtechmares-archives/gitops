@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cherry-hcloud-csi-driver
+  namespace: argocd
+spec:
+  project: infrastructure
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-system
+  source:
+    chart: hcloud-csi
+    repoURL: https://charts.hetzner.cloud
+    targetRevision: 2.5.1
+    helm:
+      releaseName: hcloud-csi-driver
+      valuesObject:
+        controller:
+          hcloudToken:
+            existingSecret:
+              name: hcloud-token
+              key: token

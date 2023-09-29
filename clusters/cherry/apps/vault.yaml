@@ -16,8 +16,8 @@ spec:
     namespace: vault
   source:
     chart: vault
-    repoURL: https://charts.hetzner.cloud
-    targetRevision: 2.5.1
+    repoURL: https://helm.releases.hashicorp.com
+    targetRevision: 0.25.0
     helm:
       releaseName: vault
       valuesObject:

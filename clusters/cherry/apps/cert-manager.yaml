@@ -28,3 +28,5 @@ spec:
           rollingUpdate:
             maxSurge: 1
             maxUnavailable: 0
+        webhook:
+          featureGates: "AdditionalCertificateOutputFormats=true"

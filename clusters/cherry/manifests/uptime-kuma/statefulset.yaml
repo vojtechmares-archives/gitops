@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: uptime-kuma
+  namespace: uptime-kuma
+spec:
+  replicas: 1
+  serviceName: uptime-kuma
+  selector:
+    matchLabels:
+      app: uptime-kuma
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: uptime-kuma
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: uptime-kuma
+          image: louislam/uptime-kuma:1.23.2
+          env:
+            - name: UPTIME_KUMA_PORT
+              value: "3001"
+            - name: PORT
+              value: "3001"
+          ports:
+            - name: http
+              containerPort: 3001
+              protocol: TCP
+          volumeMounts:
+            - name: kuma-data
+              mountPath: /app/data
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 500m
+              memory: 1Gi
+
+  volumeClaimTemplates:
+    - metadata:
+        name: kuma-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: "hcloud-volumes"
+        volumeMode: Filesystem
+        resources:
+          requests:
+            storage: 1Gi

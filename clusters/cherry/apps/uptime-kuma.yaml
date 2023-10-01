@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cherry-uptime-kuma
+  namespace: argocd
+spec:
+  project: infrastructure
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: uptime-kuma
+  source:
+    path: clusters/cherry/manifests/uptime-kuma/
+    repoURL: https://github.com/vojtechmares/gitops.git
+    targetRevision: HEAD

@@ -51,9 +51,9 @@ spec:
             VAULT_CACERT: /vault/userconfig/server-ca/ca.crt
 
           extraVolumes:
-            – type: secret
+            - type: secret
               name: server-tls
-            – type: secret
+            - type: secret
               name: server-ca
 
           resources:

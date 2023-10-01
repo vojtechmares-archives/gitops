@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: uptime-kuma
-  namespace: uptime-kuma
 spec:
   replicas: 1
   serviceName: uptime-kuma

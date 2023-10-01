@@ -22,7 +22,7 @@ spec:
       releaseName: cert-manager
       valuesObject:
         installCRDs: true
-        featureGates: "--feature-gates=AdditionalCertificateOutputFormats=true"
+        featureGates: "AdditionalCertificateOutputFormats=true"
         strategy:
           type: RollingUpdate
           rollingUpdate:

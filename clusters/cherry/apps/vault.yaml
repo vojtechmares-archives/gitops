@@ -106,7 +106,8 @@ spec:
 
                 storage "raft" {
                   path = "/vault/data"
-                    retry_join {
+
+                  retry_join {
                     leader_api_addr = "https://vault-0.vault-internal:8200"
                     leader_ca_cert_file = "/vault/userconfig/server-ca/ca.crt"
                     leader_client_cert_file = "/vault/userconfig/server-tls/tls.crt"

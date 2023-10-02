@@ -26,6 +26,10 @@ spec:
         # TODO: enable proxy protocol
         controller:
           kind: DaemonSet
+          updateStrategy:
+            type: RollingUpdate
+            rollingUpdate:
+              maxUnavailable: 1
           service:
             # TODO: use Service .spec.type: NodePort
             type: ClusterIP

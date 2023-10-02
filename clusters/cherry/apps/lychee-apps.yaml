@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lychee-apps
+  namespace: argocd
+spec:
+  project: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  source:
+    path: clusters/lychee/
+    repoURL: https://github.com/vojtechmares/gitops.git
+    targetRevision: HEAD

@@ -13,6 +13,8 @@ spec:
   template:
     metadata:
       name: "{{cluster}}-system-upgrade-controller"
+      annotations:
+        argocd.argoproj.io/sync-wave: "5"
     spec:
       project: infrastructure
       syncPolicy:

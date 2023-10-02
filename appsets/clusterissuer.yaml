@@ -16,6 +16,8 @@ spec:
   template:
     metadata:
       name: "{{cluster}}-http-clusterissuer"
+      annotations:
+        argocd.argoproj.io/sync-wave: "10"
     spec:
       project: infrastructure
       syncPolicy:

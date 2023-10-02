@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: universal-cert-manager
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: cherry
+            url: https://kubernetes.default.svc
+  syncPolicy:
+    applicationsSync: create-update
+    preserveResourcesOnDeletion: true
+  template:
+    metadata:
+      name: "{{cluster}}-cert-manager"
+    spec:
+      project: infrastructure
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      source:
+        chart: cert-manager
+        repoURL: https://charts.jetstack.io
+        targetRevision: 1.13.1
+        helm:
+          releaseName: cert-manager
+          valuesObject:
+            installCRDs: true
+            strategy:
+              type: RollingUpdate
+              rollingUpdate:
+                maxSurge: 1
+                maxUnavailable: 0
+            webhook:
+              strategy:
+                type: RollingUpdate
+                rollingUpdate:
+                  maxSurge: 1
+                  maxUnavailable: 0
+      destination:
+        server: "{{url}}"
+        namespace: cert-manager

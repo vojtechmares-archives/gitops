@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lychee-ingress-nginx
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: infrastructure
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    server: "https://172.16.152.1:6443"
+    namespace: ingress-nginx
+  source:
+    chart: ingress-nginx
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: 4.8.0
+    helm:
+      releaseName: ingress-nginx
+      valuesObject:
+        ingressClassResource:
+          default: true
+        controller:
+          kind: DaemonSet
+          updateStrategy:
+            type: RollingUpdate
+            rollingUpdate:
+              maxUnavailable: 1
+          service:
+            type: NodePort
+          nodePorts:
+            http: 32080
+            https: 32443
+          config:
+            allow-snippet-annotations: "true"
+            generate-request-id: "true"
+            use-proxy-protocol: "true"

@@ -20,21 +20,41 @@ spec:
     targetRevision: 4.8.0
     helm:
       releaseName: ingress-nginx
-      valuesObject:
+      # !!! BUG !!!
+      # See: https://github.com/argoproj/argo-cd/issues/15126
+      # valuesObject:
+      #   ingressClassResource:
+      #     default: true
+      #   # TODO: enable proxy protocol
+      #   controller:
+      #     kind: DaemonSet
+      #     updateStrategy:
+      #       type: RollingUpdate
+      #       rollingUpdate:
+      #         maxUnavailable: 1
+      #     service:
+      #       # TODO: use Service .spec.type: NodePort
+      #       type: ClusterIP
+      #     hostPort:
+      #       enabled: true
+      #     config:
+      #       allow-snippet-annotations: "true"
+      #       generate-request-id: "true"
+      values: |
         ingressClassResource:
-          default: "true"
+          default: true
         # TODO: enable proxy protocol
         controller:
-          kind: "DaemonSet"
+          kind: DaemonSet
           updateStrategy:
-            type: "RollingUpdate"
+            type: RollingUpdate
             rollingUpdate:
-              maxUnavailable: "1"
+              maxUnavailable: 1
           service:
             # TODO: use Service .spec.type: NodePort
-            type: "ClusterIP"
+            type: ClusterIP
           hostPort:
-            enabled: "true"
+            enabled: true
           config:
             allow-snippet-annotations: "true"
             generate-request-id: "true"

@@ -27,8 +27,7 @@ spec:
           service:
             # TODO: use Service .spec.type: NodePort
             type: ClusterIP
-            externalIPs:
-              - "128.140.25.221"
+            loadBalancerIP: "128.140.25.221"
           hostPort:
             enabled: true
           config:

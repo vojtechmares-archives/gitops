@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cherry-universal-apps
+  namespace: argocd
+spec:
+  project: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  source:
+    path: universal/
+    repoURL: https://github.com/vojtechmares/gitops.git
+    targetRevision: HEAD

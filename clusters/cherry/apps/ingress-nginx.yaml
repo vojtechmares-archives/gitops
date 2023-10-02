@@ -22,19 +22,19 @@ spec:
       releaseName: ingress-nginx
       valuesObject:
         ingressClassResource:
-          default: true
+          default: "true"
         # TODO: enable proxy protocol
         controller:
-          kind: DaemonSet
+          kind: "DaemonSet"
           updateStrategy:
-            type: RollingUpdate
+            type: "RollingUpdate"
             rollingUpdate:
-              maxUnavailable: 1
+              maxUnavailable: "1"
           service:
             # TODO: use Service .spec.type: NodePort
-            type: ClusterIP
+            type: "ClusterIP"
           hostPort:
-            enabled: true
+            enabled: "true"
           config:
             allow-snippet-annotations: "true"
             generate-request-id: "true"

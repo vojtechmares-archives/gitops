@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cherry-uptime-kuma
+  name: uptime-kuma
   namespace: argocd
 spec:
-  project: infrastructure
+  project: monitoring
   syncPolicy:
     automated:
       prune: true

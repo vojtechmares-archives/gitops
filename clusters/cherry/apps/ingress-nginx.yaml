@@ -21,6 +21,8 @@ spec:
     helm:
       releaseName: ingress-nginx
       valuesObject:
+        ingressClassResource:
+          default: true
         # TODO: enable proxy protocol
         controller:
           kind: DaemonSet

@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: universal-apps
+  name: appsets
   namespace: argocd
 spec:
   project: argocd

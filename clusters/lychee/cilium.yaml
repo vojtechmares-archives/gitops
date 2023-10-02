@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lychee-cilium
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+spec:
+  project: infrastructure
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    server: "https://172.16.152.1:6443"
+    namespace: kube-system
+  source:
+    chart: cilium
+    repoURL: https://helm.cilium.io/
+    targetRevision: 1.14.2
+    helm:
+      releaseName: cilium
+      valuesObject:
+        operator:
+          replicas: 1
+        kubeProxyReplacement: true
+        k8sServiceHost: 172.16.152.1
+        k8sServicePort: 6443
+        hubble:
+          relay:
+            enabled: true
+          ui:
+            enabled: true

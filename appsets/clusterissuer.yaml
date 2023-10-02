@@ -10,6 +10,8 @@ spec:
         elements:
           - cluster: cherry
             url: https://kubernetes.default.svc
+          - cluster: lychee
+            url: https://172.16.152.1:6443
   syncPolicy:
     applicationsSync: create-update
     preserveResourcesOnDeletion: true

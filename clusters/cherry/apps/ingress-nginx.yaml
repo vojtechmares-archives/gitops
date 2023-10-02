@@ -23,6 +23,7 @@ spec:
       valuesObject:
         ingressClassResource:
           default: true
+        # TODO: enable proxy protocol
         controller:
           kind: DaemonSet
           updateStrategy:
@@ -30,11 +31,10 @@ spec:
             rollingUpdate:
               maxUnavailable: 1
           service:
-            type: NodePort
-            nodePorts:
-              http: 32080
-              https: 32443
+            # TODO: use Service .spec.type: NodePort
+            type: ClusterIP
+          hostPort:
+            enabled: true
           config:
             allow-snippet-annotations: "true"
             generate-request-id: "true"
-            use-proxy-protocol: "true"

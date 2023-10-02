@@ -33,9 +33,9 @@ spec:
               maxUnavailable: 1
           service:
             type: NodePort
-          nodePorts:
-            http: 32080
-            https: 32443
+            nodePorts:
+              http: 32080
+              https: 32443
           config:
             allow-snippet-annotations: "true"
             generate-request-id: "true"

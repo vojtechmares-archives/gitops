@@ -37,3 +37,4 @@ spec:
             enabled: true
           config:
             allow-snippet-annotations: "true"
+            generate-request-id: "true"

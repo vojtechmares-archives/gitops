@@ -20,7 +20,42 @@ spec:
     targetRevision: 5.46.7
     helm:
       releaseName: argocd
-      valuesObject:
+      # !!! BUG !!!
+      # See: https://github.com/argoproj/argo-cd/issues/15126
+      # valuesObject:
+      #   global:
+      #     affinity:
+      #       podAntiAffinity: hard
+
+      #   redis-ha:
+      #     enabled: true
+
+      #   controller:
+      #     replicas: 1
+
+      #   repoServer:
+      #     replicas: 2
+
+      #   applicationSet:
+      #     replicas: 2
+
+      #   server:
+      #     replicas: 2
+      #     ingress:
+      #       enabled: true
+      #       hosts:
+      #         - argocd.ops.mareshq.com
+      #       ingressClassName: nginx
+      #       annotations:
+      #         cert-manager.io/cluster-issuer: letsencrypt-prod
+      #         nginx.ingress.kubernetes.io/server-snippet: |
+      #           proxy_ssl_verify off;
+      #         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      #       tls:
+      #         - hosts:
+      #             - argocd.ops.mareshq.com
+      #           secretName: argocd-tls
+      values: |
         global:
           affinity:
             podAntiAffinity: hard

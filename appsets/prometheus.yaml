@@ -1,0 +1,101 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: universal-prometheus
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: lychee
+            url: https://172.16.152.1:6443
+  syncPolicy:
+    applicationsSync: create-update
+    preserveResourcesOnDeletion: true
+  template:
+    metadata:
+      name: "{{cluster}}-prometheus"
+      annotations:
+        argocd.argoproj.io/sync-wave: "5"
+    spec:
+      project: monitoring
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      source:
+        chart: kube-prometheus-stack
+        repoURL: https://prometheus-community.github.io/helm-charts
+        targetRevision: 51.2.0
+        helm:
+          releaseName: prometheus
+          values: |
+            fullnameOverride: "prometheus"
+
+            prometheus:
+              prometheusSpec:
+                serviceMonitorSelectorNilUsesHelmValues: false
+                podMonitorSelectorNilUsesHelmValues: false
+                ruleSelectorNilUsesHelmValues: false
+
+                storageSpec:
+                  volumeClaimTemplate:
+                    spec:
+                      storageClassName: hcloud-volumes
+                      accessModes: ["ReadWriteOnce"]
+                      resources:
+                        requests:
+                          storage: 20Gi
+
+              ingress:
+                enabled: true
+                pathType: Prefix
+                annotations:
+                  cert-manager.io/cluster-issuer: letsencrypt-prod
+                hosts:
+                  - prometheus.{{cluster}}.k8s.vxm.cz
+                paths:
+                  - /
+                tls:
+                  - hosts:
+                    - prometheus.{{cluster}}.k8s.vxm.cz
+                    secretName: prometheus-ingress-tls
+
+              serviceMonitor:
+                selfMonitor: true
+
+            grafana:
+              enabled: false
+
+            alertmanager:
+              enabled: true
+              ingress:
+                enabled: true
+                ingressClassName: nginx
+                annotations:
+                  cert-manager.io/cluster-issuer: letsencrypt-prod
+                hosts:
+                  - alertmanager.{{cluster}}.k8s.vxm.cz
+                paths:
+                  - /
+                pathType: Prefix
+                tls:
+                  - hosts:
+                      - alertmanager.{{cluster}}.k8s.vxm.cz
+                    secretName: alertmanager-ingress-tls
+
+              alertmanagerSpec:
+                resources:
+                  limits:
+                    cpu: 250m
+                    memory: 256Mi
+                  requests:
+                    cpu: 100m
+                    memory: 256Mi
+
+      destination:
+        server: "{{url}}"
+        namespace: monitoring

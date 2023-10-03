@@ -12,7 +12,9 @@ spec:
     - "*"
   destinations:
     - namespace: monitoring
-      server: https://kubernetes.default.svc
+      server: "*"
+    - namespace: kube-system
+      server: "*"
     - namespace: uptime-kuma
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:

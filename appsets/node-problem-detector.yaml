@@ -30,7 +30,7 @@ spec:
       source:
         chart: node-problem-detector
         repoURL: https://charts.deliveryhero.io/
-        targetRevision: 2.3.11
+        targetRevision: 2.3.10
         helm:
           releaseName: node-problem-detector
           valuesObject:

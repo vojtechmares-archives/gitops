@@ -50,7 +50,7 @@ spec:
 
         # Pods must be spread across nodes
         # See: https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_affinities.tpl#L56-L106
-        # podAntiAffinityPreset: hard
+        podAntiAffinityPreset: hard
 
         updateStrategy:
           type: RollingUpdate

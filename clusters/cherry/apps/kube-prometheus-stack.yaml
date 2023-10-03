@@ -107,6 +107,16 @@ spec:
                     requests:
                       storage: 50Gi
 
+            additionalScrapeConfigs:
+              - job_name: "node-exporter"
+                metrics_path: "/metrics"
+                static_configs:
+                  - targets:
+                      - 172.16.1.1:9100
+                      - 172.16.1.2:9100
+                      - maple.vxm.cz:9100
+                      - alder.vxm.cz:9100
+
           serviceMonitor:
             selfMonitor: true
 

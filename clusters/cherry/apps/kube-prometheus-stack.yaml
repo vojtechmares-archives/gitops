@@ -117,6 +117,24 @@ spec:
                       - maple.vxm.cz:9100
                       - alder.vxm.cz:9100
 
+              # See: https://developers.mattermost.com/blog/cloud-monitoring/
+              - job_name: "federate"
+                scrape_interval: 15s
+
+                honor_labels: true
+                metrics_path: "/federate"
+
+                params:
+                  'match[]':
+                    - '{job="prometheus"}'
+                    - '{__name__=~"job:.*"}'
+
+                static_configs:
+                  - targets:
+                    - prometheus.lychee.k8s.vxm.cz.
+                    labels:
+                      clusterID: lychee
+
           serviceMonitor:
             selfMonitor: true
 

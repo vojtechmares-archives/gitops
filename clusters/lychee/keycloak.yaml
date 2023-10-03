@@ -54,8 +54,9 @@ spec:
 
         updateStrategy:
           type: RollingUpdate
-          rollingUpdate:
-            maxUnavailable: 1
+          # See: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#maximum-unavailable-pods
+          # rollingUpdate:
+          #   maxUnavailable: 1
 
         service:
           type: ClusterIP

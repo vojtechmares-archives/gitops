@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: universal-cert-manager
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: cherry
+            url: https://kubernetes.default.svc
+          - cluster: lychee
+            url: https://172.16.152.1:6443
+  syncPolicy:
+    applicationsSync: sync
+  template:
+    metadata:
+      name: "{{cluster}}-node-problem-detector"
+      annotations:
+        argocd.argoproj.io/sync-wave: "5"
+    spec:
+      project: monitoring
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      source:
+        chart: node-problem-detector
+        repoURL: https://charts.deliveryhero.io/
+        targetRevision: 2.3.11
+        helm:
+          releaseName: node-problem-detector
+          valuesObject:
+            metrics:
+              enabled: true
+              serviceMonitor:
+                enabled: true
+              prometheusRule:
+                enabled: true
+
+      destination:
+        server: "{{url}}"
+        namespace: monitoring

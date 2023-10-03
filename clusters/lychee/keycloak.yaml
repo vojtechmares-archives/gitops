@@ -18,7 +18,7 @@ spec:
     namespace: mareshq-keycloak
   source:
     chart: keycloak
-    repoURL: registry-1.docker.io/bitnamicharts/keycloak
+    repoURL: https://charts.bitnami.com/bitnami
     targetRevision: 16.1.1
     helm:
       releaseName: keycloak

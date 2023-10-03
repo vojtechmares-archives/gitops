@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lychee-hcloud-csi-driver
+  namespace: argocd
+spec:
+  project: infrastructure
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  destination:
+    server: https://172.16.152.1:6443
+    namespace: kube-system
+  source:
+    chart: hcloud-csi
+    repoURL: https://charts.hetzner.cloud
+    targetRevision: 2.5.1
+    helm:
+      releaseName: hcloud-csi-driver
+      valuesObject:
+        controller:
+          hcloudToken:
+            existingSecret:
+              name: hcloud-token
+              key: token

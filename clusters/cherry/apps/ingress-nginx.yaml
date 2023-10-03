@@ -55,6 +55,10 @@ spec:
             type: ClusterIP
           hostPort:
             enabled: true
+          metrics:
+            enabled: true
+            serviceMonitor:
+              enabled: true
           config:
             allow-snippet-annotations: "true"
             generate-request-id: "true"
